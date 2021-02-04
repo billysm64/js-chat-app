@@ -6,16 +6,24 @@
   </head>
   <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
+    <script src="./main.js"></script>
     <div class="container">
       <script id="chat-messages" type="text/x-handlebars-template">
         {{#each key}}
           <div>{{this.text}}</div>
           <h1>{{this.username}}</h1>
           <p>{{this.created_at}}</p>
+          <button type="button" class="sendChat" onclick="sendChat()">Delete</button>
+          <hr>
         {{/each}}
       </script>
     </div>
-    <button id="myBtn">Click to Chat!</button>
-    <script src="./main.js"></script>
+    <form action="/action_page.php">
+      <label for="chatmsg">Your message:</label>
+      <input type="text" id="chatmsg" name="chatmsg" />
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" />
+    </form>
+    <button type="button" class="sendChat" onclick="sendChat()">Click to Chat!</button>
   </body>
 </html>

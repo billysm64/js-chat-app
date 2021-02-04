@@ -17,28 +17,38 @@ fetch(BASE_URL)
   .then(response => response.json())
   .then(data => generateHTML({key: data}));
 
-let chat = {
-  "text": "Hello.",
-  "username": "Gemma",
-};
+
 //
 
+let reloadPage = false;
+
 function sendChat() {
-  fetch(BASE_URL, {
+  chatMessage = document.getElementById('chatmsg').value
+  usernameMessage = document.getElementById('username').value
+  if ((chatMessage === "") || (usernameMessage === "")) {
+    alert("Please enter a value for both the chat and the username.")
+  } else {
+    let chat = {
+      "text": chatMessage,
+      "username": usernameMessage,
+    };
+    fetch(BASE_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(chat),
-  })
+    })
     .then(response => {
       if (!response.ok) {
         throw new Error('Bad post request');
       }
       return response.json()
     })
-    .then(data => console.log('Success. Todo created!'))
+    .then(data => {
+      alert("Congratulations! You have sent a chat message!")
+      window.location.reload(true);
+    })
     .catch(error => console.log('Error:', error))
+  }
 }
-
-document.getElementById("myBtn").addEventListener("click", sendChat());
