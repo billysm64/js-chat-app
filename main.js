@@ -33,22 +33,53 @@ function sendChat() {
       "username": usernameMessage,
     };
     fetch(BASE_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
     },
     body: JSON.stringify(chat),
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Bad post request');
-      }
-      return response.json()
-    })
-    .then(data => {
-      alert("Congratulations! You have sent a chat message!")
-      window.location.reload(true);
-    })
-    .catch(error => console.log('Error:', error))
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Bad post request');
+        }
+        return response.json()
+      })
+      .then(data => {
+        alert("Congratulations! You have sent a chat message!")
+        window.location.reload(true);
+      })
+      .catch(error => console.log('Error:', error))
   }
 }
+
+function deleteChat() {
+  chatID = document.getElementById('hiddenidp').textContent;
+  console.log(chatID)
+  fetch(`${BASE_URL}${chatID}/`, {
+    method: 'DELETE',
+  })//fetch a specific item
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Bad delete request');
+      }
+    })
+    .catch(error => console.log('Error:', error))
+    .finally(() => {
+      alert("Congratulations! You have deleted a message!");
+      window.location.reload(true);
+    });
+};
+
+// function deleteChat() {
+//   fetch(`${BASE_URL}/25/`) {
+//     method: 'DELETE',
+//   })//fetch a specific item
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error('Bad delete request');
+//       }
+//     }
+//     .catch(error => console.log('Error:', error))
+//     .finally(() => console.log("Yeah, baby!"));
+// }

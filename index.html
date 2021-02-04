@@ -10,10 +10,11 @@
     <div class="container">
       <script id="chat-messages" type="text/x-handlebars-template">
         {{#each key}}
-          <div>{{this.text}}</div>
-          <h1>{{this.username}}</h1>
+          <p hidden id="hiddenidp">{{this.id}}</p>
+          <h1 id="lol">{{this.username}}</h1>
           <p>{{this.created_at}}</p>
-          <button type="button" class="sendChat" onclick="sendChat()">Delete</button>
+          <div>{{this.text}}</div>
+          <button type="button" class="deleteChat" onclick="deleteChat()">Delete</button>
           <hr>
         {{/each}}
       </script>
