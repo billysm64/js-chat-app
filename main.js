@@ -1,5 +1,7 @@
 const BASE_URL = `https://tiny-taco-server.herokuapp.com/api/v1/chats/`;
 
+// -------- SHOW CHAT DATA ----------
+
 const generateHTML = (data) => {
   // console.log('data', data);
 
@@ -16,23 +18,27 @@ fetch(BASE_URL)
   .then(data => generateHTML({key: data}));
 
 let chat = {
-  "id": 17,
-  "text": "Shucks, I'd like to ketch the feller what invented Music lessons!",
-  "username": "Bobby Bumps",
+  "text": "Hello.",
+  "username": "Gemma",
 };
 //
-// fetch(BASE_URL, {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-//   body: JSON.stringify(chat),
-// })
-//   .then(response => {
-//     if (!response.ok) {
-//       throw new Error('Bad post request');
-//     }
-//     return response.json()
-//   })
-//   .then(data => console.log('Success. Todo created!'))
-//   .catch(error => console.log('Error:', error));
+
+function sendChat() {
+  fetch(BASE_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(chat),
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Bad post request');
+      }
+      return response.json()
+    })
+    .then(data => console.log('Success. Todo created!'))
+    .catch(error => console.log('Error:', error))
+}
+
+document.getElementById("myBtn").addEventListener("click", sendChat());
